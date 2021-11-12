@@ -32,6 +32,12 @@ namespace insuriviti.Controllers
         }
 
 
+        public IActionResult Faq()
+        {
+            return View();
+        }
+
+
 
         public IActionResult Privacy()
         {
