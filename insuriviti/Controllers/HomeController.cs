@@ -51,6 +51,12 @@ namespace insuriviti.Controllers
             return View();
         }
 
+        [Authorize(Roles = "HR, User")]
+        public IActionResult ClaimSubmit()
+        {
+            return View();
+        }
+
         [Authorize(Roles = "HR, Admin, User")]
         public IActionResult Privacy()
         {

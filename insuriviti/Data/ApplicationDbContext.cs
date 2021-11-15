@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using insuriviti.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,7 @@ namespace insuriviti.Data
             : base(options)
         {
         }
+
+        public DbSet<ClaimSubmit> ClaimSubmit { get; set; }
     }
 }
