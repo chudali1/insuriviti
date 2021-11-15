@@ -11,51 +11,47 @@ using System.Threading.Tasks;
 
 namespace insuriviti.Controllers
 {
-    [Authorize(Roles = "HR")]
+    [Authorize(Roles = "HR, Admin, User")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly RoleManager<IdentityRole> roleManager;
-
-
-        public HomeController(RoleManager<IdentityRole> roleManager)
-        {
-            this.roleManager = roleManager;
-        }
-
+        
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
 
-   
-
- 
-
-
-            [AllowAnonymous]
+               [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
 
+        [Authorize(Roles = "HR, Admin, User")]
         public IActionResult Landing()
         {
             return View();
         }
 
-
+        [Authorize(Roles = "Admin, User")]
         public IActionResult Faq()
         {
             return View();
         }
 
+        [Authorize(Roles = "HR, User")]
         public IActionResult ClaimHistory()
         {
             return View();
         }
 
+        [Authorize(Roles = "HR, User")]
+        public IActionResult ActiveClaims()
+        {
+            return View();
+        }
 
+        [Authorize(Roles = "HR, Admin, User")]
         public IActionResult Privacy()
         {
             return View();
