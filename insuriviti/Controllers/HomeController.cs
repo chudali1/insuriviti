@@ -37,6 +37,10 @@ namespace insuriviti.Controllers
             return View();
         }
 
+        public IActionResult ClaimHistory()
+        {
+            return View();
+        }
 
 
         public IActionResult Privacy()
