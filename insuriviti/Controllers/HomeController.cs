@@ -1,5 +1,6 @@
 ﻿using insuriviti.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -10,17 +11,29 @@ using System.Threading.Tasks;
 
 namespace insuriviti.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "HR")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly RoleManager<IdentityRole> roleManager;
+
+
+        public HomeController(RoleManager<IdentityRole> roleManager)
+        {
+            this.roleManager = roleManager;
+        }
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
 
-        [AllowAnonymous]
+   
+
+ 
+
+
+            [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
