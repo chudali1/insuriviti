@@ -15,5 +15,10 @@ namespace insuriviti.Data
         }
 
         public DbSet<ClaimSubmit> ClaimSubmit { get; set; }
+
+        public DbSet<ClaimStatus> ClaimStatus { get; set; }
+        public DbSet<ClaimHistory> ClaimHistory { get; set; }
+
+
     }
 }

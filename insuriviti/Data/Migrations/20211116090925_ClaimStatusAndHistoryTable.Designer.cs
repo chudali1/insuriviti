@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using insuriviti.Data;
 
 namespace insuriviti.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211116090925_ClaimStatusAndHistoryTable")]
+    partial class ClaimStatusAndHistoryTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -232,7 +234,7 @@ namespace insuriviti.Data.Migrations
                     b.Property<int>("ClaimId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ClaimStatusID")
+                    b.Property<int?>("ClaimStatusId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
@@ -247,15 +249,18 @@ namespace insuriviti.Data.Migrations
                     b.Property<DateTime>("LastUpdateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("LastUpdateUser")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("LastUpdateUserId")
+                        .HasColumnType("int");
 
                     b.Property<float?>("ReinburshmentAmount")
                         .HasColumnType("real");
 
+                    b.Property<string>("StatusID")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ClaimStatusID");
+                    b.HasIndex("ClaimStatusId");
 
                     b.ToTable("ClaimHistory");
                 });
@@ -291,19 +296,19 @@ namespace insuriviti.Data.Migrations
                     b.Property<string>("BankName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("CompelledDate")
+                    b.Property<DateTime>("CompelledDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("CoverageEffDate")
+                    b.Property<DateTime>("CoverageEffDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("Date")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DateOfBirth")
+                    b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DateTimeOfAccident")
+                    b.Property<DateTime>("DateTimeOfAccident")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("EmployeeRepresentativeName")
@@ -333,10 +338,10 @@ namespace insuriviti.Data.Migrations
                     b.Property<string>("RelationWithPatient")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("ReturnToWorkDate")
+                    b.Property<DateTime>("ReturnToWorkDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<float?>("TotalAmountClaimed")
+                    b.Property<float>("TotalAmountClaimed")
                         .HasColumnType("real");
 
                     b.Property<string>("email")
@@ -402,9 +407,7 @@ namespace insuriviti.Data.Migrations
                 {
                     b.HasOne("insuriviti.Models.ClaimStatus", "ClaimStatus")
                         .WithMany()
-                        .HasForeignKey("ClaimStatusID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClaimStatusId");
 
                     b.Navigation("ClaimStatus");
                 });

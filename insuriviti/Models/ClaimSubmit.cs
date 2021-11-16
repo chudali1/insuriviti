@@ -17,7 +17,7 @@ namespace insuriviti.Models
         public String FullName  { get; set; }
 
         [Display(Name = "Date Of Birth")]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         [Display(Name = "Patient Name")]
         public String PatientName { get; set; }
@@ -45,7 +45,7 @@ namespace insuriviti.Models
         public String MobileNo { get; set; }
 
         [Display(Name = "Coverage Effective Date")]
-        public DateTime CoverageEffDate { get; set; }
+        public DateTime? CoverageEffDate { get; set; }
 
         [Display(Name = "No Of Treatement Paper Attached")]
         public int NoOfTreatementPaperAttached { get; set; }
@@ -54,7 +54,7 @@ namespace insuriviti.Models
         public int NoOfBillAttached { get; set; }
 
         [Display(Name = "Total Amount Claimed")]
-        public float TotalAmountClaimed { get; set; }
+        public float? TotalAmountClaimed { get; set; }
 
         [Display(Name = "Employee Email")]
         public string email { get; set; }
@@ -62,21 +62,21 @@ namespace insuriviti.Models
         //only for accident
 
         [Display(Name = "Date Of Accident")]
-        public DateTime DateTimeOfAccident { get; set; }
+        public DateTime? DateTimeOfAccident { get; set; }
         
         [Display(Name = "When was insured compelled to give up his/her duties? ")]
 
-        public DateTime CompelledDate { get; set; }
+        public DateTime? CompelledDate { get; set; }
 
         [Display(Name = "When did insured returned to work?")]
         
-        public DateTime ReturnToWorkDate { get; set; }
+        public DateTime? ReturnToWorkDate { get; set; }
 
       
         [Display(Name = "  Employer’s Representative Name:")]
         public String EmployeeRepresentativeName { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
 
     }
