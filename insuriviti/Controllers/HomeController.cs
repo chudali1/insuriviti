@@ -63,6 +63,12 @@ namespace insuriviti.Controllers
             return View();
         }
 
+        [Authorize(Roles = "HR, Admin, User")]
+        public IActionResult OptimumCalculator()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
