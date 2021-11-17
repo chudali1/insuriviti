@@ -127,16 +127,16 @@ namespace insuriviti.Controllers
         }
 
 
-        [Authorize(Roles = "HR")]
-        [HttpGet]
-        public IActionResult ProcessClaim()
-        {
-            var processClaim = _context.ProcessClaim.FromSqlRaw("select * from (select *, row_number() over(partition by claimid order by lastupdatedate desc ,id desc) as rn from claimHistory ch ) t where t.rn = 1 and t.ClaimStatusID in (1,3,5)");
+        //[Authorize(Roles = "HR")]
+        //[HttpGet]
+        //public IActionResult ProcessClaim()
+        //{
+        //    var processClaim = _context.ProcessClaim.FromSqlRaw("select * from (select *, row_number() over(partition by claimid order by lastupdatedate desc ,id desc) as rn from claimHistory ch ) t where t.rn = 1 and t.ClaimStatusID in (1,3,5)");
 
 
 
-            return View(processClaim);
-        }
+        //    return View(processClaim);
+        //}
 
 
 

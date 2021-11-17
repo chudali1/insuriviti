@@ -20,16 +20,10 @@
                 @Html.DisplayNameFor(model => model.EmployeeName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ClaimStatusID)
+                @Html.DisplayNameFor(model => model.ClaimStatusName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FeedBack)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CalimAmount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReinburshmentAmount)
+                @Html.DisplayNameFor(model => model.ClaimAmount)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CreatedDate)
@@ -43,7 +37,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.PaidMonth)
             </th>
-            <th></th>
+            @*<th></th>*@
         </tr>
     </thead>
     <tbody>
@@ -56,16 +50,10 @@
                 @Html.DisplayFor(modelItem => item.EmployeeName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ClaimStatusID)
+                @Html.DisplayFor(modelItem => item.ClaimStatusName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FeedBack)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CalimAmount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReinburshmentAmount)
+                @Html.DisplayFor(modelItem => item.ClaimAmount)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedDate)
@@ -79,11 +67,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PaidMonth)
             </td>
-            <td>
+            @*<td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+            </td>*@
         </tr>
 }
     </tbody>
