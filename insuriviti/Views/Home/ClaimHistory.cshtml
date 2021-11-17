@@ -1,8 +1,10 @@
-﻿
+﻿@model IEnumerable<insuriviti.Models.ClaimHistory>
+
 @{
     ViewData["Title"] = "ClaimHistory";
     Layout = "~/Views/Shared/_masterlayout.cshtml";
 }
+
 <link rel="stylesheet" href="~/templete/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="~/templete/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet" href="~/templete./plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
@@ -19,6 +21,10 @@
 <script src="~/templete/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="~/templete/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="~/templete/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<h1>Claim History</h1>
+
+
+
 
 <div class="card">
     <div class="card-header">
@@ -29,102 +35,146 @@
         <table id="example1" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Claim Date</th>
-                    <th>Claim Form</th>
-                    <th>Name</th>
-                    <th>Status</th>
-                    <th>Paid Month</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ClaimId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmployeeName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ClaimStatus)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FeedBack)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CalimAmount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ReinburshmentAmount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PaidMonth)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastUpdateDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastUpdateUser)
+                    </th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>11/15/2021</td>
-                    <td>2</td>
-                    <td>Sagar Chudali</td>
+                @foreach (var item in Model)
+                {
+                <tr data-widget="expandable-table" aria-expanded="false">
                     <td>
-                        <div class="progress progress-xs">
-                            <div class="progress-bar bg-warning" style="width: 50%"></div>
-                        </div>
-                        In Progress
+                        @Html.DisplayFor(modelItem => item.ClaimId)
                     </td>
-                    <td>TBD</td>
-                </tr>
-                <tr>
-                    <td>11/15/2020</td>
-                    <td>1</td>
-                    <td>Sagar Chudali</td>
                     <td>
-                        <div class="progress progress-xs">
-                            <div class="progress-bar bg-danger" style="width: 100%"></div>
-                        </div>
-                        Rejected
+                        @Html.DisplayFor(modelItem => item.EmployeeName)
                     </td>
-                    <td>N/A</td>
-                </tr>
-                <tr>
-                    <td>11/15/2021</td>
-                    <td>2</td>
-                    <td>Sagar Chudali</td>
                     <td>
+
                         <div class="progress progress-xs">
-                            <div class="progress-bar bg-success" style="width: 100%"></div>
-                        </div>
-                        Accepted
-                    </td>
-                    <td>Aswin</td>
-                </tr>
-                <tr>
-                    <td>11/15/2021</td>
-                    <td>2</td>
-                    <td>Sagar Chudali</td>
-                    <td>
-                        <div class="progress progress-xs">
-                            <div class="progress-bar bg-success" style="width: 100%"></div>
-                        </div>
-                        Accepted
-                    </td>
-                    <td>Aswin</td>
-                </tr>
-                <tr>
-                    <td>11/15/2021</td>
-                    <td>2</td>
-                    <td>Sagar Chudali</td>
-                    <td>
-                        <div class="progress progress-xs">
-                            <div class="progress-bar bg-success" style="width: 100%"></div>
-                        </div>
-                        Accepted
-                    </td>
-                    <td>Aswin</td>
-                </tr>
-                <tr>
-                    <td>11/15/2021</td>
-                    <td>2</td>
-                    <td>Sagar Chudali</td>
-                    <td>
-                        <div class="progress progress-xs">
-                            <div class="progress-bar bg-success" style="width: 100%"></div>
-                        </div>
-                        Accepted
-                    </td>
-                    <td>Aswin</td>
-                </tr>
-                <tr>
-                    <td>11/15/2021</td>
-                    <td>2</td>
-                    <td>Sagar Chudali</td>
-                    <td>
-                        <div class="progress progress-xs">
-                            <div class="progress-bar bg-success" style="width: 100%"></div>
-                        </div>
-                        Accepted
-                    </td>
-                    <td>Aswin</td>
-                </tr>
+                            @if (item.ClaimStatusID == 1)
+                            {
+                                <div class="progress-bar bg-warning" style="width: 20%"></div>
 
 
+                            }
+
+                            @if (item.ClaimStatusID == 2)
+                            {
+                                <div class="progress-bar bg-warning" style="width: 40%"></div>
+
+                            }
+                            @if (item.ClaimStatusID == 3)
+                            {
+                                <div class="progress-bar bg-warning" style="width: 60%"></div>
+                            }
+                            @if (item.ClaimStatusID == 4)
+                            {
+                                <div class="progress-bar bg-danger" style="width: 100%"></div>
+                            }
+                            @if (item.ClaimStatusID == 5)
+                            {
+                                <div class="progress-bar bg-success" style="width: 100%"></div>
+                            }
+                            @if (item.ClaimStatusID == 6)
+                            {
+                                <div class="progress-bar bg-success" style="width: 100%"></div>
+                            }
+
+                        </div>
+                        @if (item.ClaimStatusID == 1)
+                        {
+                            <div>Submitted To HR</div>
+
+
+                        }
+
+                        @if (item.ClaimStatusID == 2)
+                        {
+                            <div>Submitted To Insurance</div>
+
+                        }
+                        @if (item.ClaimStatusID == 3)
+                        {
+                            <div>Rework Needed </div>
+                        }
+                        @if (item.ClaimStatusID == 4)
+                        {
+                            <div>Rejected</div>
+                        }
+                        @if (item.ClaimStatusID == 5)
+                        {
+                            <div> Accepted</div>
+                        }
+                        @if (item.ClaimStatusID == 6)
+                        {
+                            <div> Reinburshed</div>
+                        }
+
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FeedBack)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CalimAmount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReinburshmentAmount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaidMonth)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastUpdateDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastUpdateUser)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+               
+                }
+
+               
             </tbody>
-            
+
         </table>
     </div>
     <!-- /.card-body -->

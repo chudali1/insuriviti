@@ -1,8 +1,189 @@
-﻿
+﻿@model IEnumerable<insuriviti.Models.ClaimHistory>
+
 @{
     ViewData["Title"] = "ActiveClaims";
     Layout = "~/Views/Shared/_masterlayout.cshtml";
 }
+<link rel="stylesheet" href="~/templete/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="~/templete/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" href="~/templete./plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
-<h1>ActiveClaims</h1>
+<script src="~/templete/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/templete/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="~/templete/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="~/templete/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="~/templete/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="~/templete/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="~/templete/plugins/jszip/jszip.min.js"></script>
+<script src="~/templete/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="~/templete/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="~/templete/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="~/templete/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="~/templete/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<h1>Active Claims</h1>
 
+
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Insurance Claim History</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ClaimId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmployeeName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ClaimStatus)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FeedBack)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CalimAmount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ReinburshmentAmount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PaidMonth)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastUpdateDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastUpdateUser)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr data-widget="expandable-table" aria-expanded="false">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClaimId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeName)
+                    </td>
+                    <td>
+
+                        <div class="progress progress-xs">
+                            @if (item.ClaimStatusID == 1)
+                            {
+                                <div class="progress-bar bg-warning" style="width: 20%"></div>
+
+
+                            }
+
+                            @if (item.ClaimStatusID == 2)
+                            {
+                                <div class="progress-bar bg-warning" style="width: 40%"></div>
+
+                            }
+                            @if (item.ClaimStatusID == 3)
+                            {
+                                <div class="progress-bar bg-warning" style="width: 60%"></div>
+                            }
+                            @if (item.ClaimStatusID == 4)
+                            {
+                                <div class="progress-bar bg-danger" style="width: 100%"></div>
+                            }
+                            @if (item.ClaimStatusID == 5)
+                            {
+                                <div class="progress-bar bg-success" style="width: 100%"></div>
+                            }
+                            @if (item.ClaimStatusID == 6)
+                            {
+                                <div class="progress-bar bg-success" style="width: 100%"></div>
+                            }
+
+                        </div>
+                        @if (item.ClaimStatusID == 1)
+                        {
+                            <div>Submitted To HR</div>
+
+
+                        }
+
+                        @if (item.ClaimStatusID == 2)
+                        {
+                    <div>Submitted To Insurance</div>
+
+                        }
+                        @if (item.ClaimStatusID == 3)
+                        {
+                            <div>Rework Needed </div>
+                        }
+                        @if (item.ClaimStatusID == 4)
+                        {
+                            <div>Rejected</div>
+                        }
+                        @if (item.ClaimStatusID == 5)
+                        {
+                            <div> Accepted</div>
+                        }
+                        @if (item.ClaimStatusID == 6)
+                        {
+                    <div> Reinburshed</div>
+                        }
+
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FeedBack)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CalimAmount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReinburshmentAmount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaidMonth)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastUpdateDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastUpdateUser)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+
+                }
+
+
+            </tbody>
+
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>
+<!-- /.card -->
+
+<script>
+    $(document).ready(function () {
+        $("#example1").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
+</script>

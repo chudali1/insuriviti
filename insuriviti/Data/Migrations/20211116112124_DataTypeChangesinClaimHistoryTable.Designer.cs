@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using insuriviti.Data;
 
 namespace insuriviti.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211116112124_DataTypeChangesinClaimHistoryTable")]
+    partial class DataTypeChangesinClaimHistoryTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -248,9 +250,6 @@ namespace insuriviti.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastUpdateUser")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PaidMonth")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<float?>("ReinburshmentAmount")

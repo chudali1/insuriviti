@@ -1,0 +1,1 @@
+﻿select * from ClaimHistory where ClaimStatusID in (1,3,5)
