@@ -3,6 +3,7 @@ using insuriviti.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -56,6 +57,7 @@ namespace insuriviti.Controllers
             IEnumerable<ClaimHistory> claimHistories;
             if (User.IsInRole("HR")){
                 claimHistories = _context.ClaimHistory;
+                
             }
             else
             {
@@ -68,18 +70,20 @@ namespace insuriviti.Controllers
         [Authorize(Roles = "HR, User")]
         public IActionResult ActiveClaims()
         {
-            IEnumerable<ClaimHistory> claimHistories;
+            //IEnumerable<ClaimHistory> claimHistories;
 
-            if (User.IsInRole("HR"))
-            {
-                claimHistories = _context.ClaimHistory.Where(x => x.ClaimStatusID == 1);
-            }
-            else
-            {
-                claimHistories = _context.ClaimHistory.Where(x => x.LastUpdateUser == User.Identity.Name && x.ClaimStatusID ==1);
-            }
+            var activeClaims = _context.ClaimHistory.FromSqlRaw("select * from (select *, row_number() over(partition by claimid order by lastupdatedate desc ,id desc) as rn from claimHistory ch ) t where t.rn = 1 and  t.ClaimStatusID not in (4,6)");
 
-            return View(claimHistories);
+            //if (User.IsInRole("HR"))
+            //{
+            //    claimHistories = _context.ClaimHistory.Where(x => x.ClaimStatusID == 1);
+            //}
+            //else
+            //{
+            //    claimHistories = _context.ClaimHistory.Where(x => x.LastUpdateUser == User.Identity.Name && x.ClaimStatusID ==1);
+            //}
+
+            return View(activeClaims);
         }
 
         [Authorize(Roles = "HR, User")]
@@ -110,7 +114,9 @@ namespace insuriviti.Controllers
                 ReinburshmentAmount = 0.0f,
                 CreatedDate = claimSubmit.Date.Value,
                 LastUpdateDate= DateTime.Now,
-                LastUpdateUser = User.Identity.Name
+                LastUpdateUser = User.Identity.Name,
+                PaidMonth = ""
+                
                      
             
             };
@@ -119,6 +125,20 @@ namespace insuriviti.Controllers
             _context.SaveChanges();
             return RedirectToAction("ClaimHistory");
         }
+
+
+        [Authorize(Roles = "HR")]
+        [HttpGet]
+        public IActionResult ProcessClaim()
+        {
+            var processClaim = _context.ProcessClaim.FromSqlRaw("select * from (select *, row_number() over(partition by claimid order by lastupdatedate desc ,id desc) as rn from claimHistory ch ) t where t.rn = 1 and t.ClaimStatusID in (1,3,5)");
+
+
+
+            return View(processClaim);
+        }
+
+
 
         [Authorize(Roles = "HR, Admin, User")]
         public IActionResult Privacy()

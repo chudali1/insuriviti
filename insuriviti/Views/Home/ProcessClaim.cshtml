@@ -1,0 +1,90 @@
+﻿@model IEnumerable<insuriviti.ViewModel.ProcessClaim>
+
+@{
+    ViewData["Title"] = "ProcessClaim";
+    Layout = "~/Views/Shared/_masterlayout.cshtml";
+}
+
+<h1>ProcessClaim</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ClaimId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClaimStatusID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FeedBack)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CalimAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReinburshmentAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastUpdateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastUpdateUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaidMonth)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClaimId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClaimStatusID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FeedBack)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CalimAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReinburshmentAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUpdateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUpdateUser)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaidMonth)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

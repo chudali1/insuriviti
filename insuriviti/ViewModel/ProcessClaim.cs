@@ -4,11 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace insuriviti.Models
+namespace insuriviti.ViewModel
 {
-    public class ClaimHistory
+    public class ProcessClaim
     {
-        [Key]
         public int Id { get; set; }
 
         [Display(Name = "Claim ID")]
@@ -21,7 +20,7 @@ namespace insuriviti.Models
         public int ClaimStatusID { get; set; }
 
         //navigation property
-        public ClaimStatus ClaimStatus { get; set; }
+        
 
 
         [Display(Name = "Feedback")]
@@ -32,7 +31,6 @@ namespace insuriviti.Models
 
         [Display(Name = "Reinburshment Amount")]
         public float? ReinburshmentAmount { get; set; }
-
 
         [Display(Name = "Created Date")]
         public DateTime CreatedDate { get; set; }
@@ -45,7 +43,5 @@ namespace insuriviti.Models
 
         [Display(Name = "Paid Month")]
         public String PaidMonth { get; set; }
-
-
     }
 }
