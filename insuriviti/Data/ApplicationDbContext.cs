@@ -19,7 +19,8 @@ namespace insuriviti.Data
 
         public DbSet<ClaimStatus> ClaimStatus { get; set; }
         public DbSet<ClaimHistory> ClaimHistory { get; set; }
-        public DbSet<insuriviti.ViewModel.ProcessClaim> ProcessClaim { get; set; }
+        //public DbSet<insuriviti.ViewModel.ProcessClaim> ProcessClaim { get; set; }
+        public DbSet<InsuranceKYC> InsuranceKYC { get; set; }
 
 
     }

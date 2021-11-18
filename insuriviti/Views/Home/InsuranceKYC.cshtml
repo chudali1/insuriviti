@@ -1,0 +1,299 @@
+﻿@model insuriviti.Models.InsuranceKYC;
+
+@{
+    ViewData["Title"] = "InsuranceKYC";
+    Layout = "~/Views/Shared/_masterlayout.cshtml";
+}
+
+@*Insurance KYC js Start*@
+<script>
+    $(document).ready(function () {
+
+        // Validate Citizenship No
+        $('#CitizenshipNoCheck').hide();
+        let CitizenshipNoError = true;
+        $('#CitizenshipNo').keyup(function () {
+            validateCitizenshipNo();
+        });
+
+        function validateCitizenshipNo() {
+            let input = $('#CitizenshipNo').val();
+            if (input.length == '') {
+                $('#CitizenshipNoCheck').show();
+                $('#CitizenshipNo').addClass('is-invalid');
+                CitizenshipNoError = false;
+                return false;
+            }
+            else {
+                $('#CitizenshipNo').removeClass('is-invalid');
+                $('#CitizenshipNoCheck').hide();
+            }
+        }
+
+        // Validate Citizenship Issue Date
+        $('#CitizenshipIssueDateCheck').hide();
+        let CitizenshipIssueDateError = true;
+        $('#CitizenshipIssueDate').keyup(function () {
+            validateCitizenshipIssueDate();
+        });
+
+        function validateCitizenshipIssueDate() {
+            let input = $('#CitizenshipIssueDate').val();
+            if (input.length == '') {
+                $('#CitizenshipIssueDateCheck').show();
+                $('#CitizenshipIssueDate').addClass('is-invalid');
+                CitizenshipIssueDateError = false;
+                return false;
+            }
+            else {
+                $('#CitizenshipIssueDate').removeClass('is-invalid');
+                $('#CitizenshipIssueDateCheck').hide();
+            }
+        }
+
+        // Validate FatherDOB
+        $('#FatherDOBCheck').hide();
+        let FatherDOBError = true;
+        $('#FatherDOB').keyup(function () {
+            validateFatherDOB();
+        });
+
+        function validateFatherDOB() {
+            let inputDate = $('#FatherDOB').val();
+            let inputName = $('#FatherName').val();
+            if (inputDate.length == '' && inputName.length != '') {
+                $('#FatherDOBCheck').show();
+                $('#FatherDOB').addClass('is-invalid');
+                FatherDOBError = false;
+                return false;
+            }
+            else {
+                $('#FatherDOB').removeClass('is-invalid');
+                $('#FatherDOBCheck').hide();
+            }
+        }
+
+        // Validate MotherDOB
+        $('#MotherDOBCheck').hide();
+        let MotherDOBError = true;
+        $('#MotherDOB').keyup(function () {
+            validateMotherDOB();
+        });
+
+        function validateMotherDOB() {
+            let inputDate = $('#MotherDOB').val();
+            let inputName = $('#MotherName').val();
+            if (inputDate.length == '' && inputName.length != '') {
+                $('#MotherDOBCheck').show();
+                $('#MotherDOB').addClass('is-invalid');
+                MotherDOBError = false;
+                return false;
+            }
+            else {
+                $('#MotherDOB').removeClass('is-invalid');
+                $('#MotherDOBCheck').hide();
+            }
+        }
+
+        // Validate SpouseDOB
+        $('#SpouseDOBCheck').hide();
+        let SpouseDOBError = true;
+        $('#SpouseDOB').keyup(function () {
+            validateSpouseDOB();
+        });
+
+        function validateSpouseDOB() {
+            let inputDate = $('#SpouseDOB').val();
+            let inputName = $('#SpouseName').val();
+            if (inputDate.length == '' && inputName.length != '') {
+                $('#SpouseDOBCheck').show();
+                $('#SpouseDOB').addClass('is-invalid');
+                SpouseDOBError = false;
+                return false;
+            }
+            else {
+                $('#SpouseDOB').removeClass('is-invalid');
+                $('#SpouseDOBCheck').hide();
+            }
+        }
+
+
+        // Submit button
+        $('#btnSubmit').click(function () {
+            validateCitizenshipNo();
+            validateCitizenshipIssueDate();
+            validateFatherDOB();
+            validateMotherDOB();
+            if ((CitizenshipNoError == true) &&
+                (CitizenshipIssueDateError == true) &&
+                (FatherDOBError == true) &&
+                (MotherDOBError == true)) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+    });
+</script>
+@*Insurance KYC js End*@
+
+<script>
+    function ClearKYCFields() {
+        document.getElementById("EmpDOB").value = "";
+        document.getElementById("CitizenshipNo").value = "";
+        document.getElementById("CitizenshipIssueDate").value = "";
+        document.getElementById("FatherName").value = "";
+        document.getElementById("FatherDOB").value = "";
+        document.getElementById("MotherName").value = "";
+        document.getElementById("MotherDOB").value = "";
+        document.getElementById("SpouseName").value = "";
+        document.getElementById("SpouseDOB").value = "";
+        document.getElementById("ChildNameA").value = "";
+        document.getElementById("ChildNameB").value = "";
+    }
+</script>
+
+<h1>Insurance KYC</h1>
+<hr>
+<br>
+<!-- general form elements -->
+<form id="KYCForm">
+    <div class="card card-primary">
+        <!-- /.card-header -->
+        <div class="card-body">
+
+            <div class="form-group">
+                <h5>INumber</h5>
+                @*Example HTML <input type="text" class="form-control form-control-border" id="INumber" placeholder="Your INumber">*@
+
+                @Html.TextBoxFor(m => m.INumber, new { @class = "form-control form-control-border", placeholder = "Your INumber" })
+            </div>
+            <br>
+            <div class="form-group">
+                <h5>Employee Name</h5>
+                @Html.TextBoxFor(m => m.EmpName, new { @class = "form-control form-control-border", placeholder = "Your Name" })
+            </div>
+            <br>
+
+            <div class="form-group">
+                <h5>Date of Birth</h5>
+                @Html.TextBoxFor(m => m.EmpDOB, new { @class = "form-control form-control-border", placeholder = "Date in A.D. (DD/MM/YYYY)" })
+            </div>
+            <br>
+
+            <div class="form-group">
+                <h5>Citizenship No.</h5>
+                @Html.TextBoxFor(m => m.CitizenshipNo, new { @class = "form-control form-control-border", placeholder = "Your Citizenship Number" })
+                <h6 id="CitizenshipNoCheck" style="color: red;">
+                    **Please fill out the field.
+                </h6>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <h5>Citizenship Issue Date</h5>
+                @Html.TextBoxFor(m => m.CitizenshipIssueDate, new { @class = "form-control form-control-border", placeholder = "Date in A.D. (DD/MM/YYYY)" })
+                <h6 id="CitizenshipIssueDateCheck" style="color: red;">
+                    **Please fill out the field.
+                </h6>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <h5>Father's Name</h5>
+                @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control form-control-border", placeholder = "Father's Name" })
+            </div>
+            <br>
+
+            <div class="form-group">
+                <h5>Father's Date of Birth</h5>
+                @Html.TextBoxFor(m => m.FatherDOB, new { @class = "form-control form-control-border", placeholder = "Date in A.D. (DD/MM/YYYY)" })
+                <h6 id="FatherDOBCheck" style="color: red;">
+                    **Please fill out the field.
+                </h6>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <h5>Mother's Name</h5>
+                @Html.TextBoxFor(m => m.MotherName, new { @class = "form-control form-control-border", placeholder = "Date in A.D. (DD/MM/YYYY)" })
+            </div>
+            <br>
+
+            <div class="form-group">
+                <h5>Mother's Date of Birth</h5>
+                @Html.TextBoxFor(m => m.MotherDOB, new { @class = "form-control form-control-border", placeholder = "Date in A.D. (DD/MM/YYYY)" })
+                <h6 id="MotherDOBCheck" style="color: red;">
+                    **Please fill out the field.
+                </h6>
+            </div>
+            <br>
+
+            <h5>Plan Option</h5>
+
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="pills-WithoutMaternity-tab" data-toggle="pill" href="#pills-WithoutMaternity" role="tab" aria-controls="pills-WithoutMaternity" aria-selected="true">Without Maternity</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-WithMaternity-tab" data-toggle="pill" href="#pills-WithMaternity" role="tab" aria-controls="pills-WithMaternity" aria-selected="false">With Maternity</a>
+                </li>
+            </ul>
+
+
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-WithoutMaternity" role="tabpanel" aria-labelledby="pills-WithoutMaternity-tab">
+                    <div id="plan1" class="card">
+                        <div class="card-body">
+                            Family Floater without Maternity: Self + Parents (Below the age of 70)
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pills-WithMaternity" role="tabpanel" aria-labelledby="pills-WithMaternity-tab">
+                    <div id="plan2" class="card">
+                        <div class="card-body">
+                            Family Floater with Maternity: Self + Spouse + Up to two children + Parents (Below the age of 70)
+
+                            <br><br>
+
+                            <div class="form-group">
+                                <h5>Spouse's Name</h5>
+                                @Html.TextBoxFor(m => m.SpouseName, new { @class = "form-control form-control-border", placeholder = "Spouse's Name" })
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <h5>Spouse's Date of Birth</h5>
+                                @Html.TextBoxFor(m => m.SpouseDOB, new { @class = "form-control form-control-border", placeholder = "Date in A.D. (DD/MM/YYYY)" })
+                                <h6 id="SpouseDOBCheck" style="color: red;">
+                                    **Please fill out the field.
+                                </h6>
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <h5>Child A's Name</h5>
+                                @Html.TextBoxFor(m => m.ChildNameA, new { @class = "form-control form-control-border", placeholder = "Child A's Name" })
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <h5>Child B's Name</h5>
+                                @Html.TextBoxFor(m => m.ChildNameB, new { @class = "form-control form-control-border", placeholder = "Child B's Name" })
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+            <button type="submit" value="Create" id="btnSubmit" class="btn btn-primary">Submit</button>
+            <button type="button" id="btnReset" class="btn btn-default" onclick="ClearKYCFields();">Clear</button>
+        </div>
+
+    </div>
+</form>
+<!-- /.card -->
