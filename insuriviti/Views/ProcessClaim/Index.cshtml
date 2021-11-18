@@ -37,7 +37,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.PaidMonth)
             </th>
-            @*<th></th>*@
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -67,11 +67,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PaidMonth)
             </td>
-            @*<td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>*@
+            <td>
+                <a asp-action="EditClaims" asp-route-id="@item.ClaimId">Edit</a>
+            </td>
         </tr>
 }
     </tbody>

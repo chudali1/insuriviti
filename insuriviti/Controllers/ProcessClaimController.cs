@@ -39,7 +39,7 @@ namespace insuriviti.Controllers
             {
                 claimsNeedToBeProcessed.Add(new ProcessClaim
                 {
-                    ClaimId = claim.Id,
+                    ClaimId = claim.ClaimId,
                     EmployeeName = claim.EmployeeName,
                     ClaimStatusID = claim.ClaimStatusID,
                     FeedBack = claim.FeedBack,
@@ -107,8 +107,8 @@ namespace insuriviti.Controllers
 
             ProcessClaim processClaim = new ProcessClaim
             {
-                Id = data.id,
-                claimid = data.claimid,
+                ProcessClaimsHistoryId = data.id,
+                ClaimId = data.claimid,
                 EmployeeName = data.EmployeeName,
                 ClaimStatusName = data.ClaimStatusName,
                 FeedBack = data.FeedBack,
@@ -146,5 +146,36 @@ namespace insuriviti.Controllers
                  
             return View(processClaim);
         }
+
+
+        [HttpPost]
+        public IActionResult SaveClaims(ProcessClaim processClaim)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View("EditClaims", processClaim);
+            }
+
+            ClaimHistory claimHistory = new ClaimHistory
+            {
+                ClaimId = processClaim.ClaimId,
+                EmployeeName = processClaim.EmployeeName,
+                ClaimStatusID = _context.ClaimStatus.Where(x => x.StatusName == processClaim.ClaimStatusName).Select(x => x.Id).SingleOrDefault(),
+                FeedBack = processClaim.FeedBack,
+                CalimAmount = processClaim.ClaimAmount,
+                ReinburshmentAmount = processClaim.ReinburshmentAmount,
+                CreatedDate = DateTime.Now,
+                LastUpdateDate = DateTime.Now,
+                LastUpdateUser = User.Identity.Name,
+                PaidMonth = processClaim.PaidMonth
+            };
+
+
+            _context.ClaimHistory.Add(claimHistory);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
     }
 }

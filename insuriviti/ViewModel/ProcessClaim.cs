@@ -10,7 +10,7 @@ namespace insuriviti.ViewModel
     public class ProcessClaim
     {
         
-        public int Id { get; set; }
+        public int ProcessClaimsHistoryId { get; set; }
 
         [Display(Name = "Claim ID")]
         public int ClaimId { get; set; }

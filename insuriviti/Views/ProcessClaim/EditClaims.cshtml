@@ -11,8 +11,11 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="EditClaims">
+        <form asp-action="SaveClaims">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                @Html.HiddenFor(m => m.ProcessClaimsHistoryId)
+
             <div class="form-group">
                 <label asp-for="ClaimId" class="control-label"></label>
                 <input asp-for="ClaimId" class="form-control" />
@@ -62,11 +65,6 @@
                 <label asp-for="PaidMonth" class="control-label"></label>
                 <input asp-for="PaidMonth" class="form-control" />
                 <span asp-validation-for="PaidMonth" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ClaimStatusName" class="control-label"></label>
-                <input asp-for="ClaimStatusName" class="form-control" />
-                <span asp-validation-for="ClaimStatusName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DateOfBirth" class="control-label"></label>
@@ -160,10 +158,11 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ClaimStatusName, htmlAttributes: new { @class = "control-label" })
+                @Html.LabelFor(model => model.ClaimStatusName, htmlAttributes: new { @class = "control-label" });
                 @Html.DropDownListFor(model => model.ClaimStatusName, new SelectList(Model.ClaimStatus), new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ClaimStatusName, "", new { @class = "text-danger" })
             </div>
+           
 
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
