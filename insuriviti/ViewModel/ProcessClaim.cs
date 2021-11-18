@@ -9,8 +9,7 @@ namespace insuriviti.ViewModel
 {
     public class ProcessClaim
     {
-        internal object claimid;
-
+        
         public int Id { get; set; }
 
         [Display(Name = "Claim ID")]
