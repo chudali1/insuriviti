@@ -93,6 +93,45 @@ namespace insuriviti.Controllers
             return View();
         }
 
+
+        [Authorize(Roles = "HR, User")]
+        [HttpGet]
+        public IActionResult ViewClaimSubmit(int Id)
+        {
+            var claimSubmit = _context.ClaimSubmit.Where(x => x.id == Id).FirstOrDefault();
+
+
+            return View(claimSubmit);
+          
+        }
+
+        [Authorize(Roles = "HR, User")]
+        [HttpGet]
+        public IActionResult EditClaimSubmit(int Id )
+        {
+            
+           var  claimSubmit = _context.ClaimSubmit.Where(x => x.id == Id).FirstOrDefault();
+
+
+            return View(claimSubmit);
+        }
+
+        [Authorize(Roles = "HR, User")]
+        [HttpPost]
+        public IActionResult EditClaimSubmit(ClaimSubmit claimSubmit)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(claimSubmit);
+
+            }
+            _context.ClaimSubmit.Update(claimSubmit);
+            _context.SaveChanges();
+
+
+            return RedirectToAction("ActiveClaims"); ;
+        }
+
         [Authorize(Roles = "HR, User")]
         [HttpPost]
         public IActionResult ClaimSubmit(ClaimSubmit claimSubmit)
