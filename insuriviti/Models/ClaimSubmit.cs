@@ -10,7 +10,6 @@ namespace insuriviti.Models
     {
         [Required]
         [Key]
-
         public int id { get; set; }
 
         [Display(Name ="Full Name")]

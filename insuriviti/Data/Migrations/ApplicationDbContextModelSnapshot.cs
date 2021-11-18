@@ -350,6 +350,50 @@ namespace insuriviti.Data.Migrations
                     b.ToTable("ClaimSubmit");
                 });
 
+            modelBuilder.Entity("insuriviti.ViewModel.ProcessClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<float>("CalimAmount")
+                        .HasColumnType("real");
+
+                    b.Property<int>("ClaimId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClaimStatusID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EmployeeName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FeedBack")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastUpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastUpdateUser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaidMonth")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("ReinburshmentAmount")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClaimStatusID");
+
+                    b.ToTable("ProcessClaim");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -402,6 +446,17 @@ namespace insuriviti.Data.Migrations
                 });
 
             modelBuilder.Entity("insuriviti.Models.ClaimHistory", b =>
+                {
+                    b.HasOne("insuriviti.Models.ClaimStatus", "ClaimStatus")
+                        .WithMany()
+                        .HasForeignKey("ClaimStatusID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ClaimStatus");
+                });
+
+            modelBuilder.Entity("insuriviti.ViewModel.ProcessClaim", b =>
                 {
                     b.HasOne("insuriviti.Models.ClaimStatus", "ClaimStatus")
                         .WithMany()

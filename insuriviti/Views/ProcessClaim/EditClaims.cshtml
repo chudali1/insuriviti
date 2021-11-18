@@ -1,0 +1,176 @@
+﻿@model insuriviti.ViewModel.ProcessClaim
+
+@{
+    ViewData["Title"] = "EditClaims";
+    Layout = "~/Views/Shared/_masterlayout.cshtml";
+}
+
+<h1>EditClaims</h1>
+
+<h4>ProcessClaim</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SaveClaims">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                @Html.HiddenFor(m => m.ProcessClaimsHistoryId)
+
+            <div class="form-group">
+                <label asp-for="ClaimId" class="control-label"></label>
+                <input asp-for="ClaimId" class="form-control" />
+                <span asp-validation-for="ClaimId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmployeeName" class="control-label"></label>
+                <input asp-for="EmployeeName" class="form-control" />
+                <span asp-validation-for="EmployeeName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClaimStatusID" class="control-label"></label>
+                <input asp-for="ClaimStatusID" class="form-control" />
+                <span asp-validation-for="ClaimStatusID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FeedBack" class="control-label"></label>
+                <input asp-for="FeedBack" class="form-control" />
+                <span asp-validation-for="FeedBack" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClaimAmount" class="control-label"></label>
+                <input asp-for="ClaimAmount" class="form-control" />
+                <span asp-validation-for="ClaimAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReinburshmentAmount" class="control-label"></label>
+                <input asp-for="ReinburshmentAmount" class="form-control" />
+                <span asp-validation-for="ReinburshmentAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedDate" class="control-label"></label>
+                <input asp-for="CreatedDate" class="form-control" />
+                <span asp-validation-for="CreatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastUpdateDate" class="control-label"></label>
+                <input asp-for="LastUpdateDate" class="form-control" />
+                <span asp-validation-for="LastUpdateDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastUpdateUser" class="control-label"></label>
+                <input asp-for="LastUpdateUser" class="form-control" />
+                <span asp-validation-for="LastUpdateUser" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaidMonth" class="control-label"></label>
+                <input asp-for="PaidMonth" class="form-control" />
+                <span asp-validation-for="PaidMonth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfBirth" class="control-label"></label>
+                <input asp-for="DateOfBirth" class="form-control" />
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PatientName" class="control-label"></label>
+                <input asp-for="PatientName" class="form-control" />
+                <span asp-validation-for="PatientName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RelationWithPatient" class="control-label"></label>
+                <input asp-for="RelationWithPatient" class="form-control" />
+                <span asp-validation-for="RelationWithPatient" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GroupPolicyNo" class="control-label"></label>
+                <input asp-for="GroupPolicyNo" class="form-control" />
+                <span asp-validation-for="GroupPolicyNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NatureOfSick" class="control-label"></label>
+                <input asp-for="NatureOfSick" class="form-control" />
+                <span asp-validation-for="NatureOfSick" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BankName" class="control-label"></label>
+                <input asp-for="BankName" class="form-control" />
+                <span asp-validation-for="BankName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AccountNo" class="control-label"></label>
+                <input asp-for="AccountNo" class="form-control" />
+                <span asp-validation-for="AccountNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MobileNo" class="control-label"></label>
+                <input asp-for="MobileNo" class="form-control" />
+                <span asp-validation-for="MobileNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CoverageEffDate" class="control-label"></label>
+                <input asp-for="CoverageEffDate" class="form-control" />
+                <span asp-validation-for="CoverageEffDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NoOfTreatementPaperAttached" class="control-label"></label>
+                <input asp-for="NoOfTreatementPaperAttached" class="form-control" />
+                <span asp-validation-for="NoOfTreatementPaperAttached" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NoOfBillAttached" class="control-label"></label>
+                <input asp-for="NoOfBillAttached" class="form-control" />
+                <span asp-validation-for="NoOfBillAttached" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalAmountClaimed" class="control-label"></label>
+                <input asp-for="TotalAmountClaimed" class="form-control" />
+                <span asp-validation-for="TotalAmountClaimed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="email" class="control-label"></label>
+                <input asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateTimeOfAccident" class="control-label"></label>
+                <input asp-for="DateTimeOfAccident" class="form-control" />
+                <span asp-validation-for="DateTimeOfAccident" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CompelledDate" class="control-label"></label>
+                <input asp-for="CompelledDate" class="form-control" />
+                <span asp-validation-for="CompelledDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReturnToWorkDate" class="control-label"></label>
+                <input asp-for="ReturnToWorkDate" class="form-control" />
+                <span asp-validation-for="ReturnToWorkDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmployeeRepresentativeName" class="control-label"></label>
+                <input asp-for="EmployeeRepresentativeName" class="form-control" />
+                <span asp-validation-for="EmployeeRepresentativeName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ClaimStatusName, htmlAttributes: new { @class = "control-label" });
+                @Html.DropDownListFor(model => model.ClaimStatusName, new SelectList(Model.ClaimStatus), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ClaimStatusName, "", new { @class = "text-danger" })
+            </div>
+           
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
