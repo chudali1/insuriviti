@@ -4,15 +4,23 @@
     ViewData["Title"] = "ClaimSubmit";
     Layout = "~/Views/Shared/_masterlayout.cshtml";
 }
+<script src="~/templete/plugins/dropzone/min/dropzone.min.js"></script>
 
 <h1>ClaimSubmit</h1>
 
 
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="ClaimSubmit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">Please fill the insuarance claim form</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form asp-action="ClaimSubmit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="card-body">
+            <h4 class="text-danger">(A) EMPLOYEE’S SECTION (Please use BLOCK LETTERS)</h4>
             <div class="form-group">
                 <label asp-for="FullName" class="control-label"></label>
                 <input asp-for="FullName" class="form-control" />
@@ -43,6 +51,38 @@
                 <input asp-for="NatureOfSick" class="form-control" />
                 <span asp-validation-for="NatureOfSick" class="text-danger"></span>
             </div>
+
+        </div>
+
+        <div class="card-body">
+            <div>
+                <a>
+                    I hereby certify that all answers and all documents submitted with the Claim Form are complete and true. I hereby
+                    authorize any doctor, hospital, clinic or medical provider, any insurance company or any other company, institution or any
+                    other person who has any record or information about me and / or any of my family members to provide American Life
+                    Insurance Company with the complete information, including copies of their record with reference to any sickness or
+                    accident, any treatment examination, advice or hospitalization. Any photocopy of this authorization shall be taken as the
+                    original copy. I also authorize the Company to deposit the payable claim amount in my below mentioned bank account.
+                </a>
+            </div>
+
+            <ol>
+                <li>
+                    I understand that under the Individual Privacy Act 2018, American Life Insurance Company, Nepal (MetLife) is authorized
+                    to collect, store, protect, analyze and process my Personal Information, Data and Sensitive Information including information
+                    concerning my personal ID, history related with health, (collectively Personal Information) while processing insurance claim.
+                </li>
+                <li>
+                    I give consent to store my Personal Information digitally in a secured server/cloud base and to any necessary cross
+                    border data transfers. I also give consent to disclose said information to any others within or outside Nepal in the course of
+                    claims settlement and investigations.
+                </li>
+                <li>
+                    If I have any questions concerning Privacy Policy, I will contact MetLife offices in
+                    Nepal
+                </li>
+            </ol>
+
             <div class="form-group">
                 <label asp-for="BankName" class="control-label"></label>
                 <input asp-for="BankName" class="form-control" />
@@ -58,6 +98,7 @@
                 <input asp-for="MobileNo" class="form-control" />
                 <span asp-validation-for="MobileNo" class="text-danger"></span>
             </div>
+            <h4 class="text-danger">(B) EMPLOYER’S SECTION</h4>
             <div class="form-group">
                 <label asp-for="CoverageEffDate" class="control-label"></label>
                 <input asp-for="CoverageEffDate" class="form-control" />
@@ -83,6 +124,7 @@
                 <input asp-for="email" class="form-control" />
                 <span asp-validation-for="email" class="text-danger"></span>
             </div>
+            <h4 class="text-danger">FOR ACCIDENTAL BENEFIT ONLY (ACCIDENTAL WEEKLY INCOME) </h4>
             <div class="form-group">
                 <label asp-for="DateTimeOfAccident" class="control-label"></label>
                 <input asp-for="DateTimeOfAccident" class="form-control" />
@@ -98,6 +140,10 @@
                 <input asp-for="ReturnToWorkDate" class="form-control" />
                 <span asp-validation-for="ReturnToWorkDate" class="text-danger"></span>
             </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1"> I hereby certify that all answers and all documents submitted with the Claim Form are complete and true</label>
+            </div>
             <div class="form-group">
                 <label asp-for="EmployeeRepresentativeName" class="control-label"></label>
                 <input asp-for="EmployeeRepresentativeName" class="form-control" />
@@ -108,14 +154,139 @@
                 <input asp-for="Date" class="form-control" />
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+        <!-- /.card-body -->
+        <div class="card card-default">
+            <div class="card-header">
+                <h3 class="card-title">Attach the Files</h3>
             </div>
-        </form>
-    </div>
+            <div class="card-body">
+                <div id="actions" class="row">
+                    <div class="col-lg-6">
+                        <div class="btn-group w-100">
+                            <span class="btn btn-success col fileinput-button">
+                                <i class="fas fa-plus"></i>
+                                <span>Add files</span>
+                            </span>
+                            <button type="submit" class="btn btn-primary col start">
+                                <i class="fas fa-upload"></i>
+                                <span>Start upload</span>
+                            </button>
+                            <button type="reset" class="btn btn-warning col cancel">
+                                <i class="fas fa-times-circle"></i>
+                                <span>Cancel upload</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 d-flex align-items-center">
+                        <div class="fileupload-process w-100">
+                            <div id="total-progress" class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                                <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table table-striped files" id="previews">
+                    <div id="template" class="row mt-2">
+                        <div class="col-auto">
+                            <span class="preview"><img src="data:," alt="" data-dz-thumbnail /></span>
+                        </div>
+                        <div class="col d-flex align-items-center">
+                            <p class="mb-0">
+                                <span class="lead" data-dz-name></span>
+                                (<span data-dz-size></span>)
+                            </p>
+                            <strong class="error text-danger" data-dz-errormessage></strong>
+                        </div>
+                        <div class="col-4 d-flex align-items-center">
+                            <div class="progress progress-striped active w-100" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                                <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+                            </div>
+                        </div>
+                        <div class="col-auto d-flex align-items-center">
+                            <div class="btn-group">
+                                <button class="btn btn-primary start">
+                                    <i class="fas fa-upload"></i>
+                                    <span>Start</span>
+                                </button>
+                                <button data-dz-remove class="btn btn-warning cancel">
+                                    <i class="fas fa-times-circle"></i>
+                                    <span>Cancel</span>
+                                </button>
+                                <button data-dz-remove class="btn btn-danger delete">
+                                    <i class="fas fa-trash"></i>
+                                    <span>Delete</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+           
+        </div>
+        <!-- /.card -->
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+    </form>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<script>
+    $(document).ready(function () {
+
+        Dropzone.autoDiscover = false
+
+        // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
+        var previewNode = document.querySelector("#template")
+        previewNode.id = ""
+        var previewTemplate = previewNode.parentNode.innerHTML
+        previewNode.parentNode.removeChild(previewNode)
+
+
+        var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
+            url: "/target-url", // Set the url
+            thumbnailWidth: 80,
+            thumbnailHeight: 80,
+            parallelUploads: 20,
+            previewTemplate: previewTemplate,
+            autoQueue: false, // Make sure the files aren't queued until manually added
+            previewsContainer: "#previews", // Define the container to display the previews
+            clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+        })
+
+        myDropzone.on("addedfile", function (file) {
+            // Hookup the start button
+            file.previewElement.querySelector(".start").onclick = function () { myDropzone.enqueueFile(file) }
+        })
+
+        // Update the total progress bar
+        myDropzone.on("totaluploadprogress", function (progress) {
+            document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
+        })
+
+        myDropzone.on("sending", function (file) {
+            // Show the total progress bar when upload starts
+            document.querySelector("#total-progress").style.opacity = "1"
+            // And disable the start button
+            file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
+        })
+
+        // Hide the total progress bar when nothing's uploading anymore
+        myDropzone.on("queuecomplete", function (progress) {
+            document.querySelector("#total-progress").style.opacity = "0"
+        })
+
+        // Setup the buttons for all transfers
+        // The "add files" button doesn't need to be setup because the config
+        // `clickable` has already been specified.
+        document.querySelector("#actions .start").onclick = function () {
+            myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
+        }
+        document.querySelector("#actions .cancel").onclick = function () {
+            myDropzone.removeAllFiles(true)
+        }
+    });
+</script>
 
