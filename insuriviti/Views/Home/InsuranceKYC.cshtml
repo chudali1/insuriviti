@@ -12,9 +12,6 @@
         // Validate Citizenship No
         $('#CitizenshipNoCheck').hide();
         let CitizenshipNoError = true;
-        $('#CitizenshipNo').keyup(function () {
-            validateCitizenshipNo();
-        });
 
         function validateCitizenshipNo() {
             let input = $('#CitizenshipNo').val();
@@ -27,15 +24,14 @@
             else {
                 $('#CitizenshipNo').removeClass('is-invalid');
                 $('#CitizenshipNoCheck').hide();
+                CitizenshipNoError = true;
+                return true;
             }
         }
 
         // Validate Citizenship Issue Date
         $('#CitizenshipIssueDateCheck').hide();
         let CitizenshipIssueDateError = true;
-        $('#CitizenshipIssueDate').keyup(function () {
-            validateCitizenshipIssueDate();
-        });
 
         function validateCitizenshipIssueDate() {
             let input = $('#CitizenshipIssueDate').val();
@@ -48,15 +44,14 @@
             else {
                 $('#CitizenshipIssueDate').removeClass('is-invalid');
                 $('#CitizenshipIssueDateCheck').hide();
+                CitizenshipIssueDateError = true;
+                return true;
             }
         }
 
         // Validate FatherDOB
         $('#FatherDOBCheck').hide();
         let FatherDOBError = true;
-        $('#FatherDOB').keyup(function () {
-            validateFatherDOB();
-        });
 
         function validateFatherDOB() {
             let inputDate = $('#FatherDOB').val();
@@ -70,15 +65,14 @@
             else {
                 $('#FatherDOB').removeClass('is-invalid');
                 $('#FatherDOBCheck').hide();
+                FatherDOBError = true;
+                return true;
             }
         }
 
         // Validate MotherDOB
         $('#MotherDOBCheck').hide();
         let MotherDOBError = true;
-        $('#MotherDOB').keyup(function () {
-            validateMotherDOB();
-        });
 
         function validateMotherDOB() {
             let inputDate = $('#MotherDOB').val();
@@ -92,15 +86,14 @@
             else {
                 $('#MotherDOB').removeClass('is-invalid');
                 $('#MotherDOBCheck').hide();
+                MotherDOBError = true;
+                return true;
             }
         }
 
         // Validate SpouseDOB
         $('#SpouseDOBCheck').hide();
         let SpouseDOBError = true;
-        $('#SpouseDOB').keyup(function () {
-            validateSpouseDOB();
-        });
 
         function validateSpouseDOB() {
             let inputDate = $('#SpouseDOB').val();
@@ -114,21 +107,25 @@
             else {
                 $('#SpouseDOB').removeClass('is-invalid');
                 $('#SpouseDOBCheck').hide();
+                SpouseDOBError = true;
+                return true;
             }
         }
 
 
-        // Submit button
+         //Submit button
         $('#btnSubmit').click(function () {
             validateCitizenshipNo();
             validateCitizenshipIssueDate();
             validateFatherDOB();
             validateMotherDOB();
+            validateSpouseDOB();
             if ((CitizenshipNoError == true) &&
                 (CitizenshipIssueDateError == true) &&
                 (FatherDOBError == true) &&
-                (MotherDOBError == true)) {
-                return true;
+                (MotherDOBError == true) &&
+                (SpouseDOBError == true)) {
+                return confirm("Confirm to Submit?");
             } else {
                 return false;
             }
@@ -157,7 +154,7 @@
 <hr>
 <br>
 <!-- general form elements -->
-<form id="KYCForm">
+<form id="KYCForm" asp-action="InsuranceKYC">
     <div class="card card-primary">
         <!-- /.card-header -->
         <div class="card-body">
@@ -166,24 +163,24 @@
                 <h5>INumber</h5>
                 @*Example HTML <input type="text" class="form-control form-control-border" id="INumber" placeholder="Your INumber">*@
 
-                @Html.TextBoxFor(m => m.INumber, new { @class = "form-control form-control-border", placeholder = "Your INumber" })
+                @Html.TextBoxFor(m => m.INumber, new { @class = "form-control form-control-border", placeholder = "" })
             </div>
             <br>
             <div class="form-group">
                 <h5>Employee Name</h5>
-                @Html.TextBoxFor(m => m.EmpName, new { @class = "form-control form-control-border", placeholder = "Your Name" })
+                @Html.TextBoxFor(m => m.EmpName, new { @class = "form-control form-control-border", placeholder = "Name of the Employee" })
             </div>
             <br>
 
             <div class="form-group">
                 <h5>Date of Birth</h5>
-                @Html.TextBoxFor(m => m.EmpDOB, new { @class = "form-control form-control-border", placeholder = "Date in A.D. (DD/MM/YYYY)" })
+                @Html.TextBoxFor(m => m.EmpDOB, new { @class = "form-control form-control-border", type="date" })
             </div>
             <br>
 
             <div class="form-group">
                 <h5>Citizenship No.</h5>
-                @Html.TextBoxFor(m => m.CitizenshipNo, new { @class = "form-control form-control-border", placeholder = "Your Citizenship Number" })
+                @Html.TextBoxFor(m => m.CitizenshipNo, new { @class = "form-control form-control-border", placeholder = "" })
                 <h6 id="CitizenshipNoCheck" style="color: red;">
                     **Please fill out the field.
                 </h6>
@@ -192,7 +189,7 @@
 
             <div class="form-group">
                 <h5>Citizenship Issue Date</h5>
-                @Html.TextBoxFor(m => m.CitizenshipIssueDate, new { @class = "form-control form-control-border", placeholder = "Date in A.D. (DD/MM/YYYY)" })
+                @Html.TextBoxFor(m => m.CitizenshipIssueDate, new { @class = "form-control form-control-border", type = "date" })
                 <h6 id="CitizenshipIssueDateCheck" style="color: red;">
                     **Please fill out the field.
                 </h6>
@@ -201,13 +198,13 @@
 
             <div class="form-group">
                 <h5>Father's Name</h5>
-                @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control form-control-border", placeholder = "Father's Name" })
+                @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control form-control-border", placeholder = "" })
             </div>
             <br>
 
             <div class="form-group">
                 <h5>Father's Date of Birth</h5>
-                @Html.TextBoxFor(m => m.FatherDOB, new { @class = "form-control form-control-border", placeholder = "Date in A.D. (DD/MM/YYYY)" })
+                @Html.TextBoxFor(m => m.FatherDOB, new { @class = "form-control form-control-border", type = "date" })
                 <h6 id="FatherDOBCheck" style="color: red;">
                     **Please fill out the field.
                 </h6>
@@ -216,13 +213,13 @@
 
             <div class="form-group">
                 <h5>Mother's Name</h5>
-                @Html.TextBoxFor(m => m.MotherName, new { @class = "form-control form-control-border", placeholder = "Date in A.D. (DD/MM/YYYY)" })
+                @Html.TextBoxFor(m => m.MotherName, new { @class = "form-control form-control-border", placeholder = "" })
             </div>
             <br>
 
             <div class="form-group">
                 <h5>Mother's Date of Birth</h5>
-                @Html.TextBoxFor(m => m.MotherDOB, new { @class = "form-control form-control-border", placeholder = "Date in A.D. (DD/MM/YYYY)" })
+                @Html.TextBoxFor(m => m.MotherDOB, new { @class = "form-control form-control-border", type = "date" })
                 <h6 id="MotherDOBCheck" style="color: red;">
                     **Please fill out the field.
                 </h6>
@@ -233,10 +230,10 @@
 
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="pills-WithoutMaternity-tab" data-toggle="pill" href="#pills-WithoutMaternity" role="tab" aria-controls="pills-WithoutMaternity" aria-selected="true">Without Maternity</a>
+                    <a class="nav-link active" id="pills-WithoutMaternity-tab PlanOption" data-toggle="pill" href="#pills-WithoutMaternity" role="tab" aria-controls="pills-WithoutMaternity" aria-selected="true">Without Maternity</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pills-WithMaternity-tab" data-toggle="pill" href="#pills-WithMaternity" role="tab" aria-controls="pills-WithMaternity" aria-selected="false">With Maternity</a>
+                    <a class="nav-link" id="pills-WithMaternity-tab PlanOption" data-toggle="pill" href="#pills-WithMaternity" role="tab" aria-controls="pills-WithMaternity" aria-selected="false">With Maternity</a>
                 </li>
             </ul>
 
@@ -258,13 +255,13 @@
 
                             <div class="form-group">
                                 <h5>Spouse's Name</h5>
-                                @Html.TextBoxFor(m => m.SpouseName, new { @class = "form-control form-control-border", placeholder = "Spouse's Name" })
+                                @Html.TextBoxFor(m => m.SpouseName, new { @class = "form-control form-control-border", placeholder = "" })
                             </div>
                             <br>
 
                             <div class="form-group">
                                 <h5>Spouse's Date of Birth</h5>
-                                @Html.TextBoxFor(m => m.SpouseDOB, new { @class = "form-control form-control-border", placeholder = "Date in A.D. (DD/MM/YYYY)" })
+                                @Html.TextBoxFor(m => m.SpouseDOB, new { @class = "form-control form-control-border", type = "date" })
                                 <h6 id="SpouseDOBCheck" style="color: red;">
                                     **Please fill out the field.
                                 </h6>
@@ -273,13 +270,13 @@
 
                             <div class="form-group">
                                 <h5>Child A's Name</h5>
-                                @Html.TextBoxFor(m => m.ChildNameA, new { @class = "form-control form-control-border", placeholder = "Child A's Name" })
+                                @Html.TextBoxFor(m => m.ChildNameA, new { @class = "form-control form-control-border", placeholder = "" })
                             </div>
                             <br>
 
                             <div class="form-group">
                                 <h5>Child B's Name</h5>
-                                @Html.TextBoxFor(m => m.ChildNameB, new { @class = "form-control form-control-border", placeholder = "Child B's Name" })
+                                @Html.TextBoxFor(m => m.ChildNameB, new { @class = "form-control form-control-border", placeholder = "" })
                             </div>
                             <br>
                         </div>
@@ -293,7 +290,6 @@
             <button type="submit" value="Create" id="btnSubmit" class="btn btn-primary">Submit</button>
             <button type="button" id="btnReset" class="btn btn-default" onclick="ClearKYCFields();">Clear</button>
         </div>
-
     </div>
 </form>
 <!-- /.card -->

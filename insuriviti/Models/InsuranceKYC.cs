@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,25 +11,47 @@ namespace insuriviti.Models
     {
         [Key]
         public int ID { get; set; }
+
+        [Column(TypeName = "Varchar(10)")]
         public string INumber { get; set; }
+
+        [Column(TypeName = "Varchar(100)")]
         public string EmpName { get; set; }
-        public string EmpDOB { get; set; }
+
+        [Column(TypeName="Date")]
+        public DateTime? EmpDOB { get; set; }
+
+        [Column(TypeName = "Varchar(100)")]
         public string CitizenshipNo { get; set; }
-        public string CitizenshipIssueDate { get; set; }
+
+        [Column(TypeName = "Date")]
+        public DateTime? CitizenshipIssueDate { get; set; }
+
+        [Column(TypeName = "Varchar(100)")]
         public string FatherName { get; set; }
-        public string FatherDOB { get; set; }
+
+        [Column(TypeName = "Date")]
+        public DateTime? FatherDOB { get; set; }
+
+        [Column(TypeName = "Varchar(100)")]
         public string MotherName { get; set; }
-        public string MotherDOB { get; set; }
-        public string PlanOption { get; set; }
+
+        [Column(TypeName = "Date")]
+        public DateTime? MotherDOB { get; set; }
+
+        public int PlanOption { get; set; }
+
+        [Column(TypeName = "Varchar(100)")]
         public string SpouseName { get; set; }
-        public string SpouseDOB { get; set; }
+
+        [Column(TypeName = "Date")]
+        public DateTime? SpouseDOB { get; set; }
+
+        [Column(TypeName = "Varchar(100)")]
         public string ChildNameA { get; set; }
+
+        [Column(TypeName = "Varchar(100)")]
         public string ChildNameB { get; set; }
-
-        //public void GetKYCInput(int iNumber, string empName, string empDOB, string citizenshipNo, string citizenshipIssueDate, string fatherName, string fatherDOB, string motherName, string motherDOB, string planOption, string spouseName, string spouseDOB, string childNameA, string childNameB)
-        //{
-
-        //}
     }
 }
 

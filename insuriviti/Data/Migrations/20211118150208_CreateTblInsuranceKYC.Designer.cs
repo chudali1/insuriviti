@@ -10,8 +10,8 @@ using insuriviti.Data;
 namespace insuriviti.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211118073451_AddedTableInsuranceKYC")]
-    partial class AddedTableInsuranceKYC
+    [Migration("20211118150208_CreateTblInsuranceKYC")]
+    partial class CreateTblInsuranceKYC
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -360,46 +360,46 @@ namespace insuriviti.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ChildNameA")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("Varchar(100)");
 
                     b.Property<string>("ChildNameB")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("Varchar(100)");
 
-                    b.Property<string>("CitizenshipIssueDate")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("CitizenshipIssueDate")
+                        .HasColumnType("Date");
 
                     b.Property<string>("CitizenshipNo")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("Varchar(100)");
 
-                    b.Property<string>("EmpDOB")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("EmpDOB")
+                        .HasColumnType("Date");
 
                     b.Property<string>("EmpName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("Varchar(100)");
 
-                    b.Property<string>("FatherDOB")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("FatherDOB")
+                        .HasColumnType("Date");
 
                     b.Property<string>("FatherName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("Varchar(100)");
 
                     b.Property<string>("INumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("Varchar(10)");
 
-                    b.Property<string>("MotherDOB")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("MotherDOB")
+                        .HasColumnType("Date");
 
                     b.Property<string>("MotherName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("Varchar(100)");
 
-                    b.Property<string>("PlanOption")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PlanOption")
+                        .HasColumnType("int");
 
-                    b.Property<string>("SpouseDOB")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("SpouseDOB")
+                        .HasColumnType("Date");
 
                     b.Property<string>("SpouseName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("Varchar(100)");
 
                     b.HasKey("ID");
 

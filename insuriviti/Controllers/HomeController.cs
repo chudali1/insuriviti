@@ -140,10 +140,21 @@ namespace insuriviti.Controllers
 
         [HttpGet]
         //[Authorize(Roles = "User")]
+        
+        
         public IActionResult InsuranceKYC()
         {
-            var insuranceKYC = new InsuranceKYC() { EmpName = User.Identity.Name };
-            return View(insuranceKYC);
+            var insuranceKYC = new InsuranceKYC();
+            if (User.Identity.Name == insuranceKYC.EmpName)
+            {
+                return View(insuranceKYC);
+            }
+            else
+            {
+                insuranceKYC.EmpName = User.Identity.Name;
+                return View(insuranceKYC);
+            }
+            //var insuranceKYC = new InsuranceKYC() { EmpName = User.Identity.Name };
         }
 
         [HttpPost]
@@ -155,33 +166,22 @@ namespace insuriviti.Controllers
                 return View(insuranceKYC);
             }
 
+            if (string.IsNullOrWhiteSpace(insuranceKYC.SpouseName) != true || string.IsNullOrWhiteSpace(insuranceKYC.ChildNameA) != true || string.IsNullOrWhiteSpace(insuranceKYC.ChildNameB) != true)
+            {
+                //Plan Option 2 = With Maternity
+                insuranceKYC.PlanOption = 2;
+            }
+            else
+            {
+                //Plan Option 1 = Without Maternity
+                insuranceKYC.PlanOption = 1;
+            }
+
             _context.InsuranceKYC.Add(insuranceKYC);
             _context.SaveChanges();
-
-            //var kyc = new InsuranceKYC
-            //{
-            //    INumber = insuranceKYC.INumber,
-            //    EmpName = insuranceKYC.EmpName,
-            //    EmpDOB = insuranceKYC.EmpDOB,
-            //    CitizenshipNo = insuranceKYC.CitizenshipNo,
-            //    CitizenshipIssueDate = insuranceKYC.CitizenshipIssueDate,
-            //    FatherName = insuranceKYC.FatherName,
-            //    FatherDOB = insuranceKYC.FatherDOB,
-            //    MotherName = insuranceKYC.MotherName,
-            //    MotherDOB = insuranceKYC.MotherDOB,
-            //    PlanOption = insuranceKYC.PlanOption,
-            //    SpouseName = insuranceKYC.SpouseName,
-            //    SpouseDOB = insuranceKYC.SpouseDOB,
-            //    ChildNameA = insuranceKYC.ChildNameA,
-            //    ChildNameB = insuranceKYC.ChildNameB,
-
-            //};
-
-            //_context.InsuranceKYC.Add(kyc);
-            //_context.SaveChanges();
+            
             return RedirectToAction("InsuranceKYC");
         }
-
 
 
         [Authorize(Roles = "HR, Admin, User")]
