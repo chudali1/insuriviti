@@ -1,8 +1,10 @@
 ﻿@model insuriviti.Models.ClaimSubmit
 
+
 @{
     ViewData["Title"] = "ViewClaimSubmit";
     Layout = "~/Views/Shared/_masterlayout.cshtml";
+    var images = ViewData["Images"] as FileUpload;
 }
 
 <h1>ViewClaimSubmit</h1>
@@ -125,7 +127,10 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Date)
         </dd>
-    </dl>
+        @*@foreach (var item in images)
+        { 
+        
+        }    </dl>*@
 </div>
 <div>
 

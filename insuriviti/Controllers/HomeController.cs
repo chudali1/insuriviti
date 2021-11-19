@@ -1,6 +1,9 @@
 ﻿using insuriviti.Data;
 using insuriviti.Models;
+using insuriviti.ViewModel;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,6 +22,8 @@ namespace insuriviti.Controllers
     {
 
         private readonly ApplicationDbContext _context;
+       
+        private readonly IHostingEnvironment hostingEnvironment;
 
         //public HomeController(ApplicationDbContext context)
         //{
@@ -26,10 +32,11 @@ namespace insuriviti.Controllers
 
         private readonly ILogger<HomeController> _logger;
         
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, IHostingEnvironment hostingEnvironment)
         {
             _logger = logger;
             _context = context;
+            this.hostingEnvironment = hostingEnvironment;
 
         }
 
@@ -99,8 +106,9 @@ namespace insuriviti.Controllers
         public IActionResult ViewClaimSubmit(int Id)
         {
             var claimSubmit = _context.ClaimSubmit.Where(x => x.id == Id).FirstOrDefault();
+            
 
-
+            ViewData["Images"] = _context.FileUpload.Where(x => x.ClaimId == Id);
             return View(claimSubmit);
           
         }
@@ -132,17 +140,70 @@ namespace insuriviti.Controllers
             return RedirectToAction("ActiveClaims"); ;
         }
 
+
         [Authorize(Roles = "HR, User")]
         [HttpPost]
-        public IActionResult ClaimSubmit(ClaimSubmit claimSubmit)
+        public IActionResult ClaimSubmit(ClaimSubmitViewModel model)
         {
-            if(!ModelState.IsValid){
-                return View(claimSubmit);
+            if (!ModelState.IsValid)
+            {
+                return View(model);
 
             }
+           
+
+            ClaimSubmit claimSubmit = new ClaimSubmit
+            {
+                AccountNo = model.AccountNo,
+                BankName = model.BankName,
+                CompelledDate = model.CompelledDate,
+                CoverageEffDate = model.CoverageEffDate,
+                Date = model.Date,
+                DateOfBirth = model.DateOfBirth,
+                DateTimeOfAccident = model.DateTimeOfAccident,
+                email = model.email,
+                EmployeeRepresentativeName = model.EmployeeRepresentativeName,
+                FullName = model.FullName,
+                GroupPolicyNo = model.GroupPolicyNo,
+                MobileNo = model.MobileNo,
+                NatureOfSick = model.NatureOfSick,
+                NoOfBillAttached = model.NoOfBillAttached,
+                NoOfTreatementPaperAttached = model.NoOfTreatementPaperAttached,
+                PatientName = model.PatientName,
+                RelationWithPatient = model.RelationWithPatient,
+                ReturnToWorkDate = model.ReturnToWorkDate,
+                TotalAmountClaimed = model.TotalAmountClaimed,      
+
+
+
+
+            };
 
             _context.ClaimSubmit.Add(claimSubmit);
             _context.SaveChanges();
+
+
+            string uniqueFilename = null;
+            if (model.Uploads != null && model.Uploads.Count > 0)
+            {
+                foreach (IFormFile upload in model.Uploads)
+                {
+
+                    string uplopadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
+                    uniqueFilename = Guid.NewGuid().ToString() + "_" + upload.FileName;
+                    string filePath = Path.Combine(uplopadsFolder, uniqueFilename);
+                    upload.CopyTo(new FileStream(filePath, FileMode.Create));
+
+                    var fileuplaod = new FileUpload
+                    {
+                        ClaimId = claimSubmit.id,
+                        fileName = uniqueFilename
+                    };
+                    _context.FileUpload.Add(fileuplaod);
+                    _context.SaveChanges();
+                }
+
+            }
 
             var claimHistory = new ClaimHistory {
                 ClaimId = claimSubmit.id,
