@@ -242,85 +242,95 @@
                                     </p>
                                 </a>
                             </li>
-                        }
+
 
                             <li class="nav-item">
-                                <a asp-controller="Home" asp-action="ActiveClaims" class="nav-link">
+                                <a asp-controller="InsuranceClaim" asp-action="Index" class="nav-link">
                                     <i class="nav-icon fas fa-columns"></i>
                                     <p>
-                                        Current Active Claims
+                                        Insurance Claims
                                     </p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a asp-controller="Home" asp-action="ClaimHistory" class="nav-link">
-                                    <i class="nav-icon far fa-calendar-alt"></i>
-                                    <p>
-                                        Claim History
+                        }
 
-                                    </p>
-                                </a>
-                            </li>
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-action="ActiveClaims" class="nav-link">
+                                <i class="nav-icon fas fa-columns"></i>
+                                <p>
+                                    Current Active Claims
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-action="ClaimHistory" class="nav-link">
+                                <i class="nav-icon far fa-calendar-alt"></i>
+                                <p>
+                                    Claim History
+
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-edit"></i>
+                                <p>
+                                    Insurance KYC Form
+
+                                </p>
+                            </a>
+
+                        </li>
+
+                        @*<li class="nav-item">
+            <a href="../gallery.html" class="nav-link">
+                <i class="nav-icon far fa-image"></i>
+                <p>
+                    Gallery
+                </p>
+            </a>
+        </li>*@
+
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-calculator"></i>
+                                <p>
+                                    Optimum Claim Calculator
+
+                                </p>
+                            </a>
+
+                        </li>
+
+
+                        @if (User.IsInRole("HR"))
+                        {
+
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-edit"></i>
+                                    <i class="nav-icon fas fa-search"></i>
                                     <p>
-                                        Insurance KYC Form
-
+                                        Employee Search
                                     </p>
                                 </a>
 
                             </li>
+                        }
 
-                            @*<li class="nav-item">
-                <a href="../gallery.html" class="nav-link">
-                    <i class="nav-icon far fa-image"></i>
-                    <p>
-                        Gallery
-                    </p>
-                </a>
-            </li>*@
+                        <li class="nav-item">
+                            <a href="@Url.Action("Faq", "Home")" class="nav-link">
+                                <i class="nav-icon far fa-envelope"></i>
+                                <p>
+                                    FAQ
 
+                                </p>
+                            </a>
 
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-calculator"></i>
-                                    <p>
-                                        Optimum Claim Calculator
-
-                                    </p>
-                                </a>
-
-                            </li>
+                        </li>
 
 
-                            @if (User.IsInRole("HR"))
-                            {
-
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="nav-icon fas fa-search"></i>
-                                        <p>
-                                            Employee Search
-                                        </p>
-                                    </a>
-
-                                </li>
-                            }
-
-                            <li class="nav-item">
-                                <a href="@Url.Action("Faq", "Home")" class="nav-link">
-                                    <i class="nav-icon far fa-envelope"></i>
-                                    <p>
-                                        FAQ
-
-                                    </p>
-                                </a>
-
-                            </li>
-
-
-                        </ul>
+                    </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>

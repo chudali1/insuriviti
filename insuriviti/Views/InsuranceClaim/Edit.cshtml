@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="SaveClaims" asp-controller="ProcessClaim">
+        <form asp-action="SaveClaims" asp-controller="InsuranceClaim">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 @Html.HiddenFor(m => m.ProcessClaimsHistoryId)
@@ -172,5 +172,5 @@
 </div>
 
 <div>
-    <a asp-action="Index" asp-controller="ProcessClaim">Back to List</a>
+    <a asp-action="Index" asp-controller="InsuranceClaim">Back to List</a>
 </div>
