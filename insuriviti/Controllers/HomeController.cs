@@ -106,9 +106,8 @@ namespace insuriviti.Controllers
         public IActionResult ViewClaimSubmit(int Id)
         {
             var claimSubmit = _context.ClaimSubmit.Where(x => x.id == Id).FirstOrDefault();
-            
 
-            ViewData["Images"] = _context.FileUpload.Where(x => x.ClaimId == Id);
+                ViewData["fileUpload"] = _context.FileUpload.Where(x => x.ClaimId == Id).ToList();
             return View(claimSubmit);
           
         }
